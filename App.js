@@ -1,31 +1,57 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <View>
-        <Text>Another text view you are view here!</Text>
-      </View>
-      <Text style={styles.headline}>FREECODECLOUD.COM</Text>
-      <Text>Hello World!</Text>
+  const [enteredGoalText, setEnteredGoalText] = useState("");
 
-      <Button title="Click Here" />
+  function goalInputHandler(enteredText) {
+    setEnteredGoalText(enteredText);
+  }
+
+  function addGoalHandler() {
+    console.log(enteredGoalText);
+  }
+
+  return (
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Type your goals"
+          onChangeText={goalInputHandler}
+        />
+        <Button title="Add Goal" onPress={addGoalHandler} />
+      </View>
+      <View style={styles.goalsContainer}>
+        <Text>List of your goals...</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 50,
+    paddingHorizontal: 16,
   },
-  headline: {
-    color: "red",
-    margin: 16,
-    padding: 16,
-    borderColor: "red",
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 24,
+    borderBottomColor: "#cccccc",
+    borderBottomWidth: 1,
+    flex: 1,
+  },
+  textInput: {
     borderWidth: 1,
+    borderColor: "#cccccc",
+    width: "70%",
+    marginRight: 8,
+    padding: 8,
+  },
+  goalsContainer: {
+    flex: 3,
   },
 });
